@@ -7,17 +7,17 @@ DB_USER=""
 
 
 if [ "$#" -ne 2 ]; then
-  echo "Usage: $0 <container-id> <database-file-location>"
+  echo "Usage: $(basename "$0") <container-id> <database-file-location>"
   exit 1
 fi
 
 echo "Introduzca el nombre de la base de datos a la cual realizar el importe: "
 read DB_NAME
 
-echo "Introduzca la contraseña de la base de datos: "
+echo "Introduzca la contraseña de la base de datos (root): "
 read DB_PASS
 
-echo "Introduzca el usuario de la base de datos: "
+echo "Introduzca el usuario de la base de datos (root): "
 read DB_USER
 
 
