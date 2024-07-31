@@ -4,11 +4,16 @@
 DB_NAME=""
 DB_PASS=""
 DB_USER=""
+DB_CLI="mariadb"
 
 
 if [ "$#" -ne 2 ]; then
   echo "Usage: $(basename "$0") <container-id> <database-file-location>"
   exit 1
+fi
+
+if [[ "$3" == "-mysql" ]]; then
+  DB_CLI="mysql"
 fi
 
 echo "Introduzca el nombre de la base de datos a la cual realizar el importe: "
@@ -36,8 +41,8 @@ if [[ ! -e "$database_file" ]]; then
 fi
 
 # create and drop the database
-docker exec -i "$container_id" /usr/bin/mysql -u "$DB_USER" --password="$DB_PASS" -e "
+docker exec -i "$container_id" "$DB_CLI" -u "$DB_USER" --password="$DB_PASS" -e "
 DROP DATABASE IF EXISTS $DB_NAME;
 CREATE DATABASE IF NOT EXISTS $DB_NAME;"
 # import the script
-docker exec -i "$container_id" /usr/bin/mysql -u "${DB_USER}" --password="${DB_PASS}" "${DB_NAME}" < "$database_file"
+docker exec -i "$container_id" "$DB_CLI" -u "${DB_USER}" --password="${DB_PASS}" "${DB_NAME}" < "$database_file"
