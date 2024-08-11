@@ -7,8 +7,8 @@ DB_USER=""
 DB_CLI="mariadb"
 
 
-if [ "$#" -ne 2 ]; then
-  echo "Usage: $(basename "$0") <container-id> <database-file-location>"
+if [ "$#" -ne 5 ]; then
+  echo "Usage: $(basename "$0") <container-id> <database-file-location> <database-name> <database-user> <database-password>"
   exit 1
 fi
 
@@ -16,15 +16,10 @@ if [[ "$3" == "-mysql" ]]; then
   DB_CLI="mysql"
 fi
 
-echo "Introduzca el nombre de la base de datos a la cual realizar el importe: "
-read DB_NAME
-
-echo "Introduzca la contraseña de la base de datos (root): "
-read DB_PASS
-
-echo "Introduzca el usuario de la base de datos (root): "
-read DB_USER
-
+# database data
+DB_NAME=$3
+DB_USER=$4
+DB_PASS=$5
 
 # drop database
 container_id=$1
