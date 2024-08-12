@@ -7,7 +7,7 @@ export PATH=/usr/local/bin:$PATH
 # BASE VARS
 AWS_BUCKET='s3://finanssoreal/database'
 TIMESTAMP=$(date "+%Y%m%d_%H%M")
-DOCKER_COMPOSE_PATH="/home/debian/docker-files/laravel-prod"
+DOCKER_COMPOSE_PATH="/home/debian/docker-files/laravel-prod/docker-compose.yml"
 
 # DATABASE CREDENTIALS
 MYSQL_USER='root'
