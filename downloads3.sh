@@ -1,13 +1,12 @@
 #!/bin/bash
 
 # System variables
-PROFILE=default
 BUCKET=s3://finanssoreal/database/
 
-OBJECT="$(aws s3 ls --profile $PROFILE $BUCKET | sort | tail -n 1 | awk '{print $4}')"
+OBJECT="$(aws s3 ls $BUCKET | sort | tail -n 1 | awk '{print $4}')"
 FULL_PATH="$HOME/$OBJECT"
 
-aws s3 cp "$BUCKET$OBJECT" "$FULL_PATH" --profile $PROFILE
+aws s3 cp "$BUCKET$OBJECT" "$FULL_PATH"
 gunzip $FULL_PATH
 
 # UPDATE full path
