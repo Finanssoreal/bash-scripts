@@ -11,4 +11,5 @@ mkdir -p "$MARIA_DATA" && mkdir -p "$AWS_HOME"
 podman run --rm -it \
     -v $MARIA_DATA:/etc/maria-data \
     -v $AWS_HOME:/root/.aws \
-    --network=host $DOCKER_IMAGE download
+    -e AWS_BUCKET="s3://finanssoreal-backups/" \
+    --network=host "finanssoreal/db-helper:latest" download
